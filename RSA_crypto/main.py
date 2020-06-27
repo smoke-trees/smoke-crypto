@@ -1,12 +1,16 @@
 import RSA_module
+import time
 
-bit_length = int(input("Enter bit_length: "))
+bit_length = int(input("Enter Key Bit Length: "))
 
-public, private = RSA_module.generate_keypair(2**bit_length)
+public, private = RSA_module.generate_keypair(bit_length)
 
-msg = input("Write msg: ")
-encrypted_msg, encryption_obj = RSA_module.encrypt(msg, public)
-print("Encrypted msg: " + encrypted_msg)
+message = input("Enter Message: ")
 
-decrypted_msg = RSA_module.decrypt(encryption_obj, private)
-print("Decrypted msg: " + decrypted_msg)
+t1 = time.time()
+encrypted_message = RSA_module.encrypt(message, public)
+print("Encrypted Message: " + str(encrypted_message))
+
+decrypted_message = RSA_module.decrypt(encrypted_message, private)
+print("Decrypted Message: " + str(decrypted_message))
+print('Runtime : ' + str(time.time()-t1) + ' seconds')
